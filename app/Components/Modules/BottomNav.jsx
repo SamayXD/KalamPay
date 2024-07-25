@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#FAF9F6",
   },
   images: {
     resizeMode: "contain",

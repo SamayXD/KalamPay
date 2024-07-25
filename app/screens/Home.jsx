@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    elevation: 32,
   },
   payIcon: {
     resizeMode: "contain",
@@ -148,11 +149,11 @@ const styles = StyleSheet.create({
   },
   plusButton: {
     backgroundColor: colors.white,
-    width: "75%",
+    width: "80%",
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colors.black,
     height: "100%",
   },

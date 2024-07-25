@@ -39,9 +39,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "15%",
     borderRadius: 39,
-    backgroundColor: "lightgray",
+    backgroundColor: "#FAF9F6",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#DDDCDA",
   },
   imageStyle: {
     resizeMode: "contain",
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontFamily: "SFProDisplayBold",
+    fontFamily: "SFProDisplayMedium",
     lineHeight: 24,
   },
   time: {

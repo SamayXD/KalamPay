@@ -23,5 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accentBlue,
     borderWidth: 1,
     borderColor: "#6ed9ff",
+    elevation: 4,
+    shadowColor: "#DDDCDA",
   },
 });

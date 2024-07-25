@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TransactionItem from "../Atoms/TransactionItem";
 import { ScrollView } from "react-native-gesture-handler";
+import colors from "../../../assets/colors";
 
 const Transactions = () => {
   return (
@@ -38,10 +39,19 @@ export default Transactions;
 
 const styles = StyleSheet.create({
   container: {
-    marginRight: "5%",
+    marginRight: "0%",
+    marginLeft: "-5%",
+    paddingHorizontal: "5%",
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
     flex: 1,
     marginTop: "3%",
+    paddingTop: 10,
     marginBottom: 0,
+    backgroundColor: colors.white,
+    elevation: 40,
+    shadowRadius: 40,
+    shadowColor: "lightgray",
   },
   header: {
     flexDirection: "row",
