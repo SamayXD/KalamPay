@@ -36,6 +36,6 @@ export default TopSection;
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: "white",
-    height: "85%",
+    height: "80%",
   },
 });

@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     // backgroundColor: "#FFFFFF",
     flexDirection: "row",
     height: "8%",
-    padding: 3,
+    // padding: 3,
+    paddingRight: "5%",
   },
   prof: {
     width: "15%",
