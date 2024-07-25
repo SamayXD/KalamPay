@@ -13,7 +13,7 @@ const index = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.navigate("/Onboard");
-    }, 2000);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
