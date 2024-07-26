@@ -14,7 +14,7 @@ const index = () => {
     const timer = setTimeout(() => {
       router.navigate("/screens/Home"); //DEV PURPOSES
       // router.navigate("/Onboard"); //PRODF
-    }, 10);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);

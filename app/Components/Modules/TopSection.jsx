@@ -1,8 +1,16 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TopCards from "../Atoms/TopCards";
-
+import useStore from "../../store/MainStore";
+import { useEffect } from "react";
 const TopSection = () => {
+  // const { cards } = useStore();
+  const cards = useStore((state) => state.cards);
+
+  useEffect(() => {
+    console.log("cards:", cards);
+  }, [cards]);
+
   return (
     <View style={styles.container}>
       <Text
@@ -18,13 +26,15 @@ const TopSection = () => {
         style={{
           height: "100%",
           flexDirection: "column",
-          // overflow: "hidden",
         }}
       >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <TopCards />
-          <TopCards />
-          <TopCards />
+          {cards.map((cards) => (
+            <TopCards
+              // key={transaction.id}
+              card={cards}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>
@@ -35,7 +45,6 @@ export default TopSection;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "white",
     height: "80%",
   },
 });
