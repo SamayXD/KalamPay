@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     top: "65%",
     left: "7%",
     width: "80%",
+    fontFamily: "SFProDisplayMedium",
   },
   textRegular: {
     fontFamily: "SFProDisplayRegular",

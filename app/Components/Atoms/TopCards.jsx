@@ -2,14 +2,21 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import colors from "../../../assets/colors";
 
-const TopCards = ({ card }) => {
+const TopCards = ({ card }, isStat) => {
   return (
     <View
       style={[
         styles.card,
         {
-          backgroundColor:
-            card.currency == "INR" ? colors.accentBlue : "lightgray",
+          backgroundColor: isStat
+            ? "white"
+            : card.currency == "INR"
+            ? colors.accentBlue
+            : "lightgray",
+
+          width: isStat ? "100%" : 300,
+          elevation: isStat ? 0 : 6,
+          // borderWidth: isStat ? 1 : 0,
         },
       ]}
     >
@@ -26,17 +33,40 @@ const TopCards = ({ card }) => {
           style={styles.visaLogo}
         />
       </View>
-      <Text style={styles.balanceLabel}>Your balance</Text>
+      <Text
+        style={[
+          styles.balanceLabel,
+          {
+            color: isStat ? colors.black : "lightgray",
+          },
+        ]}
+      >
+        Your balance
+      </Text>
       <Text style={styles.balanceAmount}>{card.balance}</Text>
       <View style={styles.bottomRow}>
         <View>
-          <Text style={[styles.accountNumber, styles.acTitle]}>
+          <Text
+            style={[
+              styles.accountNumber,
+              {
+                color: isStat ? colors.black : colors.white,
+              },
+            ]}
+          >
             Account Number
           </Text>
           <Text style={styles.accountNumber}>**** 9934</Text>
         </View>
         <View>
-          <Text style={[styles.accountNumber, styles.acTitle]}>Valid Thru</Text>
+          <Text
+            style={[
+              styles.accountNumber,
+              { color: isStat ? colors.black : colors.white },
+            ]}
+          >
+            Valid Thru
+          </Text>
           <Text style={styles.validThru}>05/28</Text>
         </View>
       </View>

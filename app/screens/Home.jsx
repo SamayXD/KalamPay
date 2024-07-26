@@ -15,6 +15,7 @@ import TopSection from "../Components/Modules/TopSection";
 import BottomNav from "../Components/Modules/BottomNav";
 import Transactions from "../Components/Modules/Transactions";
 import useStore from "../store/MainStore";
+import TransferBottomSheet from "../Components/Atoms/TransferBottomSheet";
 const Home = () => {
   const snapPoints = useMemo(() => ["65%"], []);
   const bottomSheetRef = useRef(null);
@@ -29,16 +30,26 @@ const Home = () => {
 
   const setTransactions = useStore((state) => state.addTransaction);
   const clearStore = useStore((state) => state.clearStore);
-  const fetchedTransactions = () => {
+  const fetchedTransactions = (
+    description,
+    name,
+    amount,
+    selectedCard,
+    credit
+  ) => {
     const tempdat = [
       {
         id: Math.floor(Math.random() * 100000),
-        title: "SAMAY N.",
-        credit: Math.random() < 0.5,
-        amount: Math.floor(Math.random() * 10000),
+        title: name,
+        // credit: Math.random() < 0.5, //dev
+        // amount: Math.floor(Math.random() * 10000),//dev
+        credit: credit,
+        amount: amount,
         time: new Date().toLocaleTimeString(),
       },
     ];
+    // setIsOpen(false);
+    handleClosePress();
     setTransactions(tempdat);
   };
 
@@ -73,6 +84,7 @@ const Home = () => {
         <View style={styles.sheetContainer}>
           {/* <Text style={styles.sheetTitle}></Text> */}
           {/* <Transactions /> */}
+          <TransferBottomSheet onSubmit={fetchedTransactions} />
         </View>
       </BottomSheet>
     );
@@ -83,7 +95,18 @@ const Home = () => {
         <Pressable
           style={styles.payButton}
           onPress={() => {
-            fetchedTransactions();
+            const name = "SAMAY";
+            const amount = Math.floor(Math.random() * 10000); //dev
+            const credit = true;
+            const description = "";
+            const selectedCard = "";
+            fetchedTransactions(
+              description,
+              name,
+              amount,
+              selectedCard,
+              credit
+            );
           }}
         >
           <Image
