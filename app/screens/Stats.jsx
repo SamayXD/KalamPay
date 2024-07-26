@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,109 +7,148 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import TopSection from "../Components/Modules/TopSection";
 import TopCards from "../Components/Atoms/TopCards";
+import BottomNav from "../Components/Modules/BottomNav";
 import colors from "../../assets/colors";
+import transactionDataByMonth from "../transactionDataByMonth";
+import { router } from "expo-router";
+import Transactions from "../Components/Modules/Transactions";
+
+const months = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"];
 
 const Stats = () => {
-  const months = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"];
-  const transactionData = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu"],
-    datasets: [
-      {
-        data: [20, 37, 45, 26, 57],
-      },
-    ],
-  };
+  const screenWidth = Dimensions.get("window").width;
+  const [selectMonth, setSelectMonth] = useState(0);
+
   const card = {
     currency: "INR",
     balance: "₹ 40,500.80",
     accountNumber: "**** 9934",
     validThru: "05/28",
   };
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Statistic</Text>
-      </View>
-
-      <View
-        style={{
-          height: "35%",
-          width: "100%",
-        }}
-      >
-        <TopCards card={card} isStat />
-      </View>
-      <View style={styles.monthSelector}>
-        {months.map((month, index) => (
+    <View style={{ flex: 1, marginBottom: "0%" }}>
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
           <TouchableOpacity
-            key={index}
-            style={[styles.monthButton, index === 0 && styles.selectedMonth]}
+            onPress={() => {
+              router.navigate("/screens/Home");
+            }}
           >
-            <Text
-              style={[
-                styles.monthText,
-                index === 0 && styles.selectedMonthText,
-              ]}
-            >
-              {month}
-            </Text>
+            <Image
+              source={require("../../assets/images/backIcon.png")}
+              style={styles.backButton}
+            />
           </TouchableOpacity>
-        ))}
-      </View>
-
-      <View style={styles.chartContainer}>
-        <View style={styles.chartHeader}>
-          <Text style={styles.chartTitle}>Transaction</Text>
-          <TouchableOpacity style={styles.earningsButton}>
-            <Text style={styles.earningsText}>Earnings ▼</Text>
-          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Statistic</Text>
         </View>
-        <LineChart
-          data={transactionData}
-          width={350}
-          height={220}
-          chartConfig={{
-            backgroundColor: "#ffffff",
-            backgroundGradientFrom: "#ffffff",
-            backgroundGradientTo: "#ffffff",
-            decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-          }}
-          bezier
-          style={styles.chart}
-        />
-      </View>
-    </ScrollView>
+
+        <View style={{ height: "35%", width: "100%" }}>
+          <TopCards card={card} isStat />
+        </View>
+
+        <View style={styles.monthSelector}>
+          {months.map((month, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.monthButton,
+                index === selectMonth && styles.selectedMonth,
+              ]}
+              onPress={() => setSelectMonth(index)}
+            >
+              <Text
+                style={[
+                  styles.monthText,
+                  index === selectMonth && styles.selectedMonthText,
+                ]}
+              >
+                {month}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.chartContainer}>
+          <View style={styles.chartHeader}>
+            <Text style={styles.chartTitle}>Transaction</Text>
+            <TouchableOpacity style={styles.earningsButton}>
+              <Text style={styles.earningsText}>Earnings ▼</Text>
+            </TouchableOpacity>
+          </View>
+          <LineChart
+            data={transactionDataByMonth[months[selectMonth]]}
+            width={380}
+            height={220}
+            chartConfig={{
+              backgroundColor: "#ffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              color: (opacity = 1) => "gray",
+              style: { borderRadius: 16 },
+              fillShadowGradient: colors.accentBlue,
+              fillShadowGradientOpacity: 1,
+              propsForBackgroundLines: { stroke: "transparent" },
+              propsForLabels: { fontSize: 12, color: colors.black },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: colors.white,
+              },
+            }}
+            bezier
+            fromZero={true}
+            style={styles.chart}
+            withHorizontalLabels={false}
+            renderDotContent={({ x, y, index, indexData }) => (
+              <Text
+                key={index}
+                style={{
+                  position: "absolute",
+                  top: y - 25,
+                  left: x - 30,
+                  fontSize: 10,
+                  color: "black",
+                  fontFamily: "SFProDisplayMedium",
+                }}
+              >
+                ₹ {indexData}
+              </Text>
+            )}
+          />
+        </View>
+      </ScrollView>
+      <BottomNav isNav={true} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#lightgray",
+    backgroundColor: "##F9F6EE",
     padding: "5%",
+    // paddingBottom: "10%",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
+    padding: 10,
   },
   backButton: {
-    fontSize: 24,
-    marginRight: 20,
+    width: 25,
+    height: 25,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 22,
+    width: "100%",
+    paddingRight: "15%",
+    textAlign: "center",
+    fontFamily: "SFProDisplayMedium",
   },
   card: {
     backgroundColor: "white",
@@ -177,14 +216,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
     borderRadius: 30,
+    elevation: 1,
   },
   monthButton: {
     padding: 10,
   },
   selectedMonth: {
-    // backgroundColor: "#e6f2ff",
-    borderRadius: 20,
+    borderRadius: 30,
     backgroundColor: colors.accentBlue,
+    elevation: 1,
   },
   monthText: {
     color: "gray",
@@ -194,9 +234,11 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     backgroundColor: "white",
-    borderRadius: 15,
+    borderRadius: 35,
     padding: 20,
     margin: 0,
+    justifyContent: "center",
+    paddingBottom: 10,
   },
   chartHeader: {
     flexDirection: "row",
@@ -209,7 +251,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   earningsButton: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#F6F6F6",
     padding: 10,
     borderRadius: 20,
   },
@@ -219,6 +261,8 @@ const styles = StyleSheet.create({
   chart: {
     marginVertical: 8,
     borderRadius: 16,
+    paddingRight: 10,
+    paddingLeft: 0,
   },
 });
 

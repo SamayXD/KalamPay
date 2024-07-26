@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    elevation: 32,
+    elevation: 1,
   },
   payIcon: {
     resizeMode: "contain",

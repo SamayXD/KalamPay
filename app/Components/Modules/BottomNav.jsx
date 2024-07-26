@@ -1,16 +1,27 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
+import { router } from "expo-router";
 
-const BottomNav = () => {
+const BottomNav = (isNav) => {
   const homeImage = require("../../../assets/images/homeIcon.png");
   const qrIcon = require("../../../assets/images/qrIcon.png");
   const cardIcon = require("../../../assets/images/cardIcon.png");
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { position: "absolute", bottom: "5%" }]}>
       <View style={styles.mainNav}>
-        <Image source={homeImage} style={styles.images} />
-        <Image source={qrIcon} style={styles.images2} />
-        <Image source={cardIcon} style={styles.images2} />
+        <Pressable
+          onPress={() => {
+            router.navigate("/screens/Home");
+          }}
+        >
+          <Image source={homeImage} style={styles.images} />
+        </Pressable>
+        <Pressable>
+          <Image source={qrIcon} style={styles.images2} />
+        </Pressable>
+        <Pressable>
+          <Image source={cardIcon} style={styles.images2} />
+        </Pressable>
       </View>
     </View>
   );
@@ -20,8 +31,7 @@ export default BottomNav;
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    bottom: "5%",
+    // bottom: "5%",
     height: "8%",
     width: "100%",
     // backgroundColor: "blue",

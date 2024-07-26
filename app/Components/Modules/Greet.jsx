@@ -2,8 +2,9 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 const Greet = () => {
-  const profic = require("../../../assets/images/profilepic.jpeg");
+  const profic = require("../../../assets/images/profPic.jpeg");
   const notif = require("../../../assets/images/notifIcon.png");
+
   return (
     <View style={styles.container}>
       <Image source={profic} style={styles.prof} />

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import TransactionItem from "../Atoms/TransactionItem";
 import { ScrollView } from "react-native-gesture-handler";
@@ -6,6 +6,8 @@ import colors from "../../../assets/colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import useStore from "../../store/MainStore";
 import { useEffect } from "react";
+import { router } from "expo-router";
+
 const Transactions = (props) => {
   const [data, setData] = useState();
   const transactions = useStore((state) => state.transactions);
@@ -18,12 +20,19 @@ const Transactions = (props) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Transactions</Text>
-        {props.isOpen ? (
-          <Text style={styles.viewAll}>Clear</Text>
-        ) : (
-          <Text style={styles.viewAll}>View All</Text>
-        )}
+        <Pressable
+          onPress={() => {
+            router.navigate("/screens/Stats");
+          }}
+        >
+          {props.isOpen ? (
+            <Text style={styles.viewAll}>Clear</Text>
+          ) : (
+            <Text style={styles.viewAll}>View All</Text>
+          )}
+        </Pressable>
       </View>
+
       <Text style={styles.todayText}>TODAY</Text>
       <ScrollView
         style={styles.scrollView}
@@ -81,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "SFProDisplayBold",
   },
   viewAll: {

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#DDDCDA",
+    borderColor: "#F9F6EE",
   },
   imageStyle: {
     resizeMode: "contain",

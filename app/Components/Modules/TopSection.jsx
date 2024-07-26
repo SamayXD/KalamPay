@@ -33,6 +33,7 @@ const TopSection = () => {
             <TopCards
               // key={transaction.id}
               card={cards}
+              isStat={false}
             />
           ))}
         </ScrollView>

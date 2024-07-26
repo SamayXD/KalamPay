@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import colors from "../../../assets/colors";
 
-const TopCards = ({ card }, isStat) => {
+const TopCards = ({ card, isStat }) => {
   return (
     <View
       style={[
@@ -15,13 +15,20 @@ const TopCards = ({ card }, isStat) => {
             : "lightgray",
 
           width: isStat ? "100%" : 300,
-          elevation: isStat ? 0 : 6,
+          elevation: isStat ? 1 : 6,
           // borderWidth: isStat ? 1 : 0,
         },
       ]}
     >
       <View style={styles.topRow}>
-        <View style={styles.currencyContainer}>
+        <View
+          style={[
+            styles.currencyContainer,
+            {
+              backgroundColor: isStat ? "#F6F6F6" : colors.white,
+            },
+          ]}
+        >
           <Image
             source={require("../../../assets/images/indFlag.png")}
             style={styles.flagIcon}
@@ -37,7 +44,7 @@ const TopCards = ({ card }, isStat) => {
         style={[
           styles.balanceLabel,
           {
-            color: isStat ? colors.black : "lightgray",
+            color: isStat ? colors.black : "white",
           },
         ]}
       >
@@ -119,9 +126,9 @@ const styles = StyleSheet.create({
   },
   balanceAmount: {
     fontSize: 32,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     // marginVertical: 10,
-    fontFamily: "SFProDisplayRegular",
+    fontFamily: "SFProDisplayMedium",
   },
   bottomRow: {
     flexDirection: "row",
