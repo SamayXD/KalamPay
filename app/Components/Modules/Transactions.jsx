@@ -1,22 +1,35 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TransactionItem from "../Atoms/TransactionItem";
 import { ScrollView } from "react-native-gesture-handler";
 import colors from "../../../assets/colors";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
+import useStore from "../../store/MainStore";
+import { useEffect } from "react";
+const Transactions = (props) => {
+  const [data, setData] = useState();
+  const transactions = useStore((state) => state.transactions);
 
-const Transactions = () => {
+  useEffect(() => {
+    console.log("Transactions:", transactions);
+  }, [transactions]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Transactions</Text>
-        <Text style={styles.viewAll}>View All</Text>
+        {props.isOpen ? (
+          <Text style={styles.viewAll}>Clear</Text>
+        ) : (
+          <Text style={styles.viewAll}>View All</Text>
+        )}
       </View>
       <Text style={styles.todayText}>TODAY</Text>
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-        <TransactionItem
+        {/* <TransactionItem
           Title={"Recieved from SuperKalam"}
           Credit={true}
           Amount={"524"}
@@ -29,7 +42,14 @@ const Transactions = () => {
         <TransactionItem Title={"SAMAY"} Credit={true} Amount={"249"} />
         <TransactionItem Title={"SAMAY"} Credit={true} Amount={"7990"} />
         <TransactionItem Title={"SAMAY"} Credit={true} Amount={"2499"} />
-        <TransactionItem Title={"SAMAY"} Credit={true} Amount={"20"} />
+        <TransactionItem Title={"SAMAY"} Credit={true} Amount={"20"} /> */}
+        {/* {console.log(transactions)} */}
+        {transactions.map((transaction) => (
+          <TransactionItem
+            // key={transaction.id}
+            props={transaction}
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -44,7 +64,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
-    flex: 1,
+    // flex: 1,
+    minHeight: "50%",
+    maxHeight: "50%",
     marginTop: "3%",
     paddingTop: 10,
     marginBottom: 0,
@@ -73,6 +95,9 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   scrollView: {
-    // maxHeight: "60%",
+    // Height: "10%",
+    // backgroundColor: "black",
+    // paddingBottom: 100,
+    // flex: 1,
   },
 });

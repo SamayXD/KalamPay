@@ -1,12 +1,20 @@
 import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState, useMemo, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import Greet from "../Components/Modules/Greet";
 import colors from "../../assets/colors";
 import TopSection from "../Components/Modules/TopSection";
 import BottomNav from "../Components/Modules/BottomNav";
 import Transactions from "../Components/Modules/Transactions";
-
+import useStore from "../store/MainStore";
 const Home = () => {
   const snapPoints = useMemo(() => ["65%"], []);
   const bottomSheetRef = useRef(null);
@@ -18,6 +26,30 @@ const Home = () => {
     bottomSheetRef.current?.expand();
     setIsOpen(true);
   };
+
+  const setTransactions = useStore((state) => state.addTransaction);
+  const clearStore = useStore((state) => state.clearStore);
+  const fetchedTransactions = () => {
+    const tempdat = [
+      {
+        id: Math.floor(Math.random() * 100000),
+        title: "SAMAY N.",
+        credit: Math.random() < 0.5,
+        amount: Math.floor(Math.random() * 10000),
+        time: new Date().toLocaleTimeString(),
+      },
+    ];
+    setTransactions(tempdat);
+  };
+
+  // useEffect(() => {
+  //   // Fetch transactions from an API or define them here
+  //   // const tempdat = fetchedTransactions();
+  //   fetchedTransactions();
+  // }, [setTransactions]);
+
+  // useEffect(() => {
+  // }, []);
 
   const renderBackdrop = useCallback(
     (props) => (
@@ -39,7 +71,8 @@ const Home = () => {
         backdropComponent={renderBackdrop}
       >
         <View style={styles.sheetContainer}>
-          <Text style={styles.sheetTitle}>{title}</Text>
+          {/* <Text style={styles.sheetTitle}></Text> */}
+          {/* <Transactions /> */}
         </View>
       </BottomSheet>
     );
@@ -47,7 +80,12 @@ const Home = () => {
   const PaymentSection = () => (
     <View style={styles.paymentSection}>
       <View style={styles.paymentButtons}>
-        <Pressable style={styles.payButton}>
+        <Pressable
+          style={styles.payButton}
+          onPress={() => {
+            fetchedTransactions();
+          }}
+        >
           <Image
             source={require("./../../assets/images/leftDownA.png")}
             style={styles.payIcon}
@@ -63,7 +101,13 @@ const Home = () => {
         </Pressable>
       </View>
       <View style={styles.plusButtonContainer}>
-        <Pressable style={styles.plusButton}>
+        <Pressable
+          style={styles.plusButton}
+          onPress={() => {
+            clearStore();
+            // console.log(useStore);
+          }}
+        >
           <Image
             source={require("./../../assets/images/plusIcon.png")}
             style={styles.plusIcon}
@@ -102,6 +146,7 @@ const styles = StyleSheet.create({
   },
   sheetContainer: {
     padding: "5%",
+    flex: 1,
   },
   sheetTitle: {
     fontSize: 33,

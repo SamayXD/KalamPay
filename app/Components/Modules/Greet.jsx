@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   alrt: {
     width: "15%",
-    height: "40%",
+    height: "35%",
     resizeMode: "contain",
     borderRadius: 100,
     position: "absolute",
