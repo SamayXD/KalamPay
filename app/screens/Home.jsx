@@ -16,18 +16,24 @@ import BottomNav from "../Components/Modules/BottomNav";
 import Transactions from "../Components/Modules/Transactions";
 import useStore from "../store/MainStore";
 import TransferBottomSheet from "../Components/Atoms/TransferBottomSheet";
+import QRScannerScreen from "./QRScannerScreen";
 const Home = () => {
+  const mainBalance = useStore((state) => state.mainBalance);
+
   const snapPoints = useMemo(() => ["65%"], []);
   const bottomSheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
 
-  const handleClosePress = () => bottomSheetRef.current?.close();
+  const handleClosePress = () => {
+    bottomSheetRef.current?.close();
+    setIsOpen(false);
+  };
   const handleOpenPress = () => {
+    console.log("handleOpenPress called");
     bottomSheetRef.current?.expand();
     setIsOpen(true);
   };
-
   const setTransactions = useStore((state) => state.addTransaction);
   const clearStore = useStore((state) => state.clearStore);
   const fetchedTransactions = (
@@ -73,21 +79,36 @@ const Home = () => {
     []
   );
 
-  const MyBottomSheet = () =>
-    isOpen && (
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={0}
-        snapPoints={snapPoints}
-        backdropComponent={renderBackdrop}
-      >
-        <View style={styles.sheetContainer}>
-          {/* <Text style={styles.sheetTitle}></Text> */}
-          {/* <Transactions /> */}
-          <TransferBottomSheet onSubmit={fetchedTransactions} />
-        </View>
-      </BottomSheet>
+  const MyBottomSheet = () => {
+    console.log("MyBottomSheet rendered, isOpen:", isOpen);
+    return (
+      isOpen && (
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}
+          backdropComponent={renderBackdrop}
+        >
+          <View style={styles.sheetContainer}>
+            <TransferBottomSheet onSubmit={fetchedTransactions} />
+            {/* <QRScannerScreen /> */}
+          </View>
+        </BottomSheet>
+      )
     );
+  };
+  const indianNames = [
+    "Aarav",
+    "Vivaan",
+    "Aditya",
+    "Vihaan",
+    "Arjun",
+    "Sai",
+    "Reyansh",
+    "Ayaan",
+    "Krishna",
+    "Ishaan",
+  ];
 
   const PaymentSection = () => (
     <View style={styles.paymentSection}>
@@ -95,7 +116,8 @@ const Home = () => {
         <Pressable
           style={styles.payButton}
           onPress={() => {
-            const name = "SAMAY";
+            const name =
+              indianNames[Math.floor(Math.random() * indianNames.length)];
             const amount = Math.floor(Math.random() * 10000); //dev
             const credit = true;
             const description = "";
@@ -150,7 +172,7 @@ const Home = () => {
         <PaymentSection />
         <Transactions />
       </View>
-      <BottomNav />
+      <BottomNav isNav="home" />
       <MyBottomSheet />
     </>
   );
@@ -231,7 +253,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   topSection: {
-    height: "40%",
+    height: "42%",
     overflow: "visible",
   },
 });

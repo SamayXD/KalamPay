@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 const useStore = create(
   persist(
     (set) => ({
+      mainBalance: 0,
       count: 0,
       transactions: [],
       cards: [
@@ -31,11 +32,24 @@ const useStore = create(
       increaseCount: () => set((state) => ({ count: state.count + 1 })),
       decreaseCount: () => set((state) => ({ count: state.count - 1 })),
       addTransaction: (transaction) =>
-        set((state) => ({
-          transactions: [transaction, ...state.transactions],
-        })),
-      clearStore: () => set({ transactions: [] }),
+        set((state) => {
+          const { amount, credit } = transaction[0];
 
+          // Update mainBalance based on the credit flag
+          const newBalance = credit
+            ? state.mainBalance + amount
+            : state.mainBalance - amount;
+
+          return {
+            transactions: [transaction, ...state.transactions],
+            mainBalance: newBalance,
+          };
+        }),
+      clearStore: () => set({ transactions: [], mainBalance: 0 }),
+      setBalance: (balance) =>
+        set((state) => ({
+          mainBalance: balance,
+        })),
       addCard: (cardData) =>
         set((state) => ({
           cards: [cardData, ...state.cards],

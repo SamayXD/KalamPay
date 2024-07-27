@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
@@ -34,7 +35,11 @@ const Stats = () => {
     <View style={{ flex: 1, marginBottom: "0%" }}>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity
+          <Pressable
+            style={{
+              // backgroundColor: colors.black,
+              padding: 5,
+            }}
             onPress={() => {
               router.navigate("/screens/Home");
             }}
@@ -43,7 +48,7 @@ const Stats = () => {
               source={require("../../assets/images/backIcon.png")}
               style={styles.backButton}
             />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.headerTitle}>Statistic</Text>
         </View>
 

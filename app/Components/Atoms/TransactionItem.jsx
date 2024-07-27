@@ -17,7 +17,11 @@ const TransactionItem = ({ props }) => {
             />
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{transaction.title}</Text>
+            <Text style={styles.title}>
+              {transaction.credit
+                ? `Received from ${transaction.title}`
+                : `Sent to ${transaction.title}`}
+            </Text>
             <Text style={styles.time}>{transaction.time}</Text>
           </View>
 

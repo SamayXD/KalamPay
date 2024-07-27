@@ -12,7 +12,7 @@ const index = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.navigate("/screens/Stats"); //DEV PURPOSES
+      router.navigate("/Onboard"); //DEV PURPOSES
       // router.navigate("/Onboard"); //PRODF
     }, 1000);
 

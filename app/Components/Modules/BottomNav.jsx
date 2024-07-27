@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import { router } from "expo-router";
-
-const BottomNav = (isNav) => {
+const BottomNav = ({ isNav }) => {
   const homeImage = require("../../../assets/images/homeIcon.png");
   const qrIcon = require("../../../assets/images/qrIcon.png");
   const cardIcon = require("../../../assets/images/cardIcon.png");
+
+  const getOpacity = (navItem) => (isNav === navItem ? 1 : 0.5);
+
   return (
     <View style={[styles.container, { position: "absolute", bottom: "5%" }]}>
       <View style={styles.mainNav}>
@@ -14,13 +16,30 @@ const BottomNav = (isNav) => {
             router.navigate("/screens/Home");
           }}
         >
-          <Image source={homeImage} style={styles.images} />
+          <Image
+            source={homeImage}
+            style={[styles.images, { opacity: getOpacity("home") }]}
+          />
         </Pressable>
-        <Pressable>
-          <Image source={qrIcon} style={styles.images2} />
+        <Pressable
+          onPress={() => {
+            router.navigate("/screens/QRScannerScreen");
+          }}
+        >
+          <Image
+            source={qrIcon}
+            style={[styles.images2, { opacity: getOpacity("qr") }]}
+          />
         </Pressable>
-        <Pressable>
-          <Image source={cardIcon} style={styles.images2} />
+        <Pressable
+          onPress={() => {
+            router.navigate("/screens/MyCards");
+          }}
+        >
+          <Image
+            source={cardIcon}
+            style={[styles.images2, { opacity: getOpacity("card") }]}
+          />
         </Pressable>
       </View>
     </View>

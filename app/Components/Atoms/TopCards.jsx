@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import colors from "../../../assets/colors";
+import useStore from "../../store/MainStore";
 
 const TopCards = ({ card, isStat }) => {
+  const mainBalance = useStore((state) => state.mainBalance);
   return (
     <View
       style={[
@@ -17,6 +19,9 @@ const TopCards = ({ card, isStat }) => {
           width: isStat ? "100%" : 300,
           elevation: isStat ? 1 : 6,
           // borderWidth: isStat ? 1 : 0,
+          padding: 20,
+          paddingBottom: isStat ? 20 : 40,
+          borderRadius: isStat ? 40 : 30,
         },
       ]}
     >
@@ -50,7 +55,7 @@ const TopCards = ({ card, isStat }) => {
       >
         Your balance
       </Text>
-      <Text style={styles.balanceAmount}>{card.balance}</Text>
+      <Text style={styles.balanceAmount}>₹{mainBalance}</Text>
       <View style={styles.bottomRow}>
         <View>
           <Text
@@ -84,13 +89,10 @@ const TopCards = ({ card, isStat }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.accentBlue,
-    borderRadius: 40,
-    padding: 20,
-    width: 300,
     marginRight: 15,
     flex: 1,
     elevation: 6,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   topRow: {
     flexDirection: "row",
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   bottomRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 10,
   },
   accountNumber: {
     fontSize: 14,

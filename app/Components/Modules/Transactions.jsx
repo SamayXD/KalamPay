@@ -11,6 +11,7 @@ import { router } from "expo-router";
 const Transactions = (props) => {
   const [data, setData] = useState();
   const transactions = useStore((state) => state.transactions);
+  const mainBalance = useStore((state) => state.mainBalance);
 
   useEffect(() => {
     console.log("Transactions:", transactions);
