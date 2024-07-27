@@ -1,8 +1,9 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
 import React, { useEffect } from "react";
 import { router } from "expo-router";
 import colors from "./../assets/colors";
 import { useFonts } from "expo-font";
+// import { Image } from "react-native-svg";
 const index = () => {
   const [fontsLoaded] = useFonts({
     SFProDisplayRegular: require("../assets/fonts/SF-Pro-Display-Regular.otf"),
@@ -14,23 +15,50 @@ const index = () => {
     const timer = setTimeout(() => {
       router.navigate("/Onboard"); //DEV PURPOSES
       // router.navigate("/Onboard"); //PRODF
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <View style={[styles.container]}>
-      <ActivityIndicator size="large" color="#171717" />
+      <Image
+        style={{
+          resizeMode: "contain",
+          width: 100,
+          height: 100,
+          borderRadius: 100,
+        }}
+        source={require("../assets/images/kalamLogo.png")}
+      />
+      <Text
+        style={{
+          fontSize: 24,
+          fontFamily: "SFProDisplayBold",
+          marginTop: 12,
+        }}
+      >
+        KalamPay.
+      </Text>
+
       <Text
         style={{
           fontSize: 18,
           fontFamily: "SFProDisplayMedium",
-          marginTop: 12,
+          // marginTop: 12,
         }}
       >
         Loading
       </Text>
+      <View
+        style={{
+          bottom: "10%",
+          position: "absolute",
+          // s
+        }}
+      >
+        <ActivityIndicator size="large" color="#171717" />
+      </View>
     </View>
   );
 };
