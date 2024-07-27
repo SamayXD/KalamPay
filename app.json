@@ -15,7 +15,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.cosamay.kalampay"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +33,14 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e70d587a-24f9-4a80-9e42-71f47e2ab827"
+      }
+    }
   }
 }
