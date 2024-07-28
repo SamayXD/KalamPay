@@ -47,37 +47,33 @@ const Home = () => {
       {
         id: Math.floor(Math.random() * 100000),
         title: name,
-        // credit: Math.random() < 0.5, //dev
-        // amount: Math.floor(Math.random() * 10000),//dev
+
         credit: credit,
         amount: amount,
         time: new Date().toLocaleTimeString(),
       },
     ];
-    // setIsOpen(false);
     handleClosePress();
     setTransactions(tempdat);
   };
-
-  // useEffect(() => {
-  //   // Fetch transactions from an API or define them here
-  //   // const tempdat = fetchedTransactions();
-  //   fetchedTransactions();
-  // }, [setTransactions]);
-
-  // useEffect(() => {
-  // }, []);
 
   const renderBackdrop = useCallback(
     (props) => (
       <BottomSheetBackdrop
         appearsOnIndex={0}
         disappearsOnIndex={-1}
+        onPress={() => {
+          handleClosePress();
+        }}
         {...props}
       />
     ),
     []
   );
+
+  useEffect(() => {
+    console.log("isOpen: ", isOpen);
+  }, [isOpen]);
 
   const MyBottomSheet = () => {
     console.log("MyBottomSheet rendered, isOpen:", isOpen);

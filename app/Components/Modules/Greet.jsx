@@ -31,7 +31,7 @@ const Greet = () => {
             lineHeight: 22,
           }}
         >
-          Samay Navale
+          Samay N.
         </Text>
       </View>
       <Image source={notif} style={styles.alrt} />
