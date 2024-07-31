@@ -18,6 +18,7 @@ const TopSection = () => {
           fontFamily: "SFProDisplayMedium",
           fontSize: 32,
           marginLeft: "2%",
+          paddingBottom: 5,
         }}
       >
         Account

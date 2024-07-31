@@ -20,7 +20,7 @@ const TopCards = ({ card, isStat }) => {
             : "#E8E8E8",
 
           width: isStat ? "100%" : 300,
-          elevation: isStat ? 1 : 6,
+          elevation: isStat ? 1 : 4,
           // borderWidth: isStat ? 1 : 0,
           padding: 20,
           paddingBottom: isStat ? 20 : 40,
