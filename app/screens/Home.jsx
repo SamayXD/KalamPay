@@ -7,6 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LinearGradient } from "expo-linear-gradient";
 
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import Greet from "../Components/Modules/Greet";
@@ -168,6 +169,14 @@ const Home = () => {
         <PaymentSection />
         <Transactions />
       </View>
+
+      <LinearGradient
+        // Background Linear Gradient
+        colors={["rgba(255,255,255,.9)", "transparent"]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 0, y: 0 }}
+        style={styles.background}
+      />
       <BottomNav isNav="home" />
       <MyBottomSheet />
     </>
@@ -177,6 +186,13 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 200,
+  },
   container: {
     flex: 1,
     padding: "5%",
@@ -249,7 +265,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   topSection: {
-    height: "42%",
+    height: "40%",
     overflow: "visible",
   },
 });
