@@ -28,7 +28,7 @@ const TransferBottomSheet = ({ onSubmit }) => {
     number: card.accountNumber,
   }));
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const mainBalance = useStore((state) => state.mainBalance);
   const handleCardSelect = (card) => {
     setSelectedCard(card);
     setIsModalVisible(false);
@@ -44,7 +44,9 @@ const TransferBottomSheet = ({ onSubmit }) => {
   //     }]
 
   const handleSubmit = () => {
-    onSubmit(description, name, amount, selectedCard, credit);
+    if (amount > 0) {
+      onSubmit(description, name, amount, selectedCard, credit);
+    }
     setAmount[""];
     setDescription[""];
     setName[""];

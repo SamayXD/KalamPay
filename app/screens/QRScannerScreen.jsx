@@ -45,7 +45,7 @@ export default function QRScannerScreen() {
           style={StyleSheet.absoluteFillObject}
         />
       </View>
-      {scanned && (
+      {scanned && !modalVisible && (
         <TouchableOpacity
           style={styles.scanAgainButton}
           onPress={() => setScanned(false)}
