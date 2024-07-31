@@ -5,6 +5,9 @@ import useStore from "../../store/MainStore";
 
 const TopCards = ({ card, isStat }) => {
   const mainBalance = useStore((state) => state.mainBalance);
+  const indFlag = require("../../../assets/images/indFlag.png");
+  const usaFlag = require("../../../assets/images/usaFlag.png");
+  const ukFlag = require("../../../assets/images/ukFlag.png");
   return (
     <View
       style={[
@@ -14,10 +17,10 @@ const TopCards = ({ card, isStat }) => {
             ? "white"
             : card.currency == "INR"
             ? colors.accentBlue
-            : "lightgray",
+            : "#E8E8E8",
 
           width: isStat ? "100%" : 300,
-          elevation: isStat ? 1 : 6,
+          elevation: isStat ? 1 : 4,
           // borderWidth: isStat ? 1 : 0,
           padding: 20,
           paddingBottom: isStat ? 20 : 40,
@@ -34,10 +37,13 @@ const TopCards = ({ card, isStat }) => {
             },
           ]}
         >
-          <Image
-            source={require("../../../assets/images/indFlag.png")}
-            style={styles.flagIcon}
-          />
+          {card.currency === "INR" ? (
+            <Image source={indFlag} style={styles.flagIcon} />
+          ) : card.currency === "USD" ? (
+            <Image source={usaFlag} style={styles.flagIcon} />
+          ) : (
+            <Image source={ukFlag} style={styles.flagIcon} />
+          )}
           <Text style={styles.currencyText}>{card.currency}</Text>
         </View>
         <Image
@@ -49,7 +55,7 @@ const TopCards = ({ card, isStat }) => {
         style={[
           styles.balanceLabel,
           {
-            color: isStat ? colors.black : "white",
+            color: isStat ? colors.black : colors.black,
           },
         ]}
       >
@@ -62,19 +68,19 @@ const TopCards = ({ card, isStat }) => {
             style={[
               styles.accountNumber,
               {
-                color: isStat ? colors.black : colors.white,
+                color: isStat ? colors.black : colors.black,
               },
             ]}
           >
             Account Number
           </Text>
-          <Text style={styles.accountNumber}>**** 9934</Text>
+          <Text style={styles.validThru}>**** 9934</Text>
         </View>
         <View>
           <Text
             style={[
               styles.accountNumber,
-              { color: isStat ? colors.black : colors.white },
+              { color: isStat ? colors.black : colors.black },
             ]}
           >
             Valid Thru
@@ -143,7 +149,7 @@ const styles = StyleSheet.create({
   },
   validThru: {
     fontSize: 14,
-    fontFamily: "SFProDisplayMedium",
+    fontFamily: "SFProDisplayBold",
   },
   acTitle: {
     color: colors.white,

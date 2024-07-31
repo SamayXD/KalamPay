@@ -13,9 +13,9 @@ const index = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.navigate("/Onboard"); //DEV PURPOSES
+      router.navigate("/screens/Home"); //DEV PURPOSES
       // router.navigate("/Onboard"); //PRODF
-    }, 2000);
+    }, 150);
 
     return () => clearTimeout(timer);
   }, []);
