@@ -1,4 +1,7 @@
 # KalamPay
+
+![KalamPay Banner](https://github.com/user-attachments/assets/b172e0eb-cbfa-41c9-8b6d-2cb7ec511a52)
+
 ## Video & ScreenShots
 
 
